@@ -5,15 +5,27 @@
             <div style="width: 280px; float: left;">
                 <div style="color: white; background-color: black; width: 100%;">Deployed</div>
                {% for f in form_deployed %}
-                 <span>{{ f.form_name }}</span>
+                <div 
+                    class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
+                    >
+                    {{ f.form_name }}
+                </div>
                {% endfor %}
                <div style="color: white; background-color: black; width: 100%;">Draft</div>
                {% for f in form_draft %}
-               <span>{{ f.form_name }}</span>
+               <div 
+               class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
+               >
+               {{ f.form_name }}
+               </div>
                {% endfor %}
                <div style="color: white; background-color: black; width: 100%;">Arquived</div>
                {% for f in form_arquived %}
-               <span>{{ f.form_name }}</span>
+               <div 
+               class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
+               >
+               {{ f.form_name }}
+               </div>
                {% endfor %}
             </div>
             <div style="margin-left: 300px;">
