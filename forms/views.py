@@ -8,7 +8,7 @@ from .models import Project_Form_Meta
 def landingPage(request):
     messages.success(request, _('You are in Home Page, Welcome!'))
     context = {}
-    context['form_deployed'] = Project_Form_Meta.objects.all()
-    context['form_draft'] = Project_Form_Meta.objects.all()
-    context['form_arquived'] = Project_Form_Meta.objects.all()
+    context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
+    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='deployed')
+    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='deployed')
     return render(request, 'landingpage.html', context) 
