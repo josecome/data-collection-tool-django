@@ -11,4 +11,14 @@ def landingPage(request):
     context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
     context['form_draft'] = Project_Form_Meta.objects.filter(form_status='deployed')
     context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='deployed')
+    return render(request, 'landingpage.html', context)
+
+
+def FormPage(request, id):
+    messages.success(request, _('You are in Home Page, Welcome!'))
+    context = {}
+    context['form_id'] = Project_Form_Meta.objects.get(pk=id.replace('-', ''))
+    context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
+    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='deployed')
+    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='deployed')
     return render(request, 'landingpage.html', context) 

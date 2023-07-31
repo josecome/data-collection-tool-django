@@ -8,7 +8,9 @@
                 <div 
                     class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
                     >
-                    {{ f.form_name }}
+                    <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px;">
+                        <button type="submit" class="">{{ f.form_name }}</button>
+                    </form>                    
                 </div>
                {% endfor %}
                <div style="color: white; background-color: black; width: 100%;">Draft</div>
@@ -16,7 +18,9 @@
                <div 
                class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
                >
-               {{ f.form_name }}
+               <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px;">
+                   <button type="submit" class="">{{ f.form_name }}</button>
+               </form>    
                </div>
                {% endfor %}
                <div style="color: white; background-color: black; width: 100%;">Arquived</div>
@@ -24,12 +28,14 @@
                <div 
                class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
                >
-               {{ f.form_name }}
+               <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px;">
+                   <button type="submit" class="">{{ f.form_name }}</button>
+               </form>    
                </div>
                {% endfor %}
             </div>
             <div style="margin-left: 300px;">
-               No Data to Display
+               {% if form_id %} {{ form_id.form_name }} {% else %} No Form Selected {% endif %}
             </div>
     </div>
 
