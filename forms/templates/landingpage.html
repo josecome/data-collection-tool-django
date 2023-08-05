@@ -35,7 +35,59 @@
                {% endfor %}
             </div>
             <div style="margin-left: 300px;">
-               {% if form_id %} {{ form_id.form_name }} {% else %} No Form Selected {% endif %}
+               {% if form_id %} 
+               <h3>{{ form_id.form_name }}</h3>
+               <form action="/formpage/submitnewfield" style="width: 100%;"></form>
+               <table style="width: 100%;">
+                 <tr>
+                   <td>
+                       Name:
+                   </td>
+                   <td>
+                       <input type="name" class="form-control" id="name" placeholder="Enter name" style="width: 260px">
+                   </td>
+                   <td>
+                       Label:
+                   </td>
+                   <td>
+                       <input type="name" class="form-control" id="name" placeholder="Enter name" style="width: 260px">
+                   </td>
+                   <td>
+                       Type:
+                   </td>
+                   <td>
+                       <select class="form-control" id="qtype" style="width: 260px">
+                           <option>String</option>
+                           <option>Integer</option>
+                       </select>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       Type:
+                   </td>
+                   <td>
+                       <select class="form-control" id="qtype" style="width: 260px">
+                           <option>Type</option>
+                           <option>Select</option>
+                       </select>
+                   </td>
+                   <td>
+                       Length:
+                   </td>
+                   <td>
+                       <input type="name" class="form-control" id="name" placeholder="Enter name" style="width: 260px">
+                   </td>
+                   <td colspan="2">                       
+                    <button type="submit" class="">Add</button>                       
+                   </td>
+                 </tr>
+                 <tr>
+                 <td colspan="6"><hr style="width: 100%;"/></td>
+                 </tr>
+               </table>
+               </form>
+               {% else %} No Form Selected {% endif %}
             </div>
     </div>
 
