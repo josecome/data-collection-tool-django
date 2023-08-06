@@ -9,6 +9,8 @@ class Project_Form_Meta(models.Model):
     form_description = models.CharField(max_length=160)
     form_country = models.CharField(max_length=40)
     form_field = models.CharField(max_length=80) # Where the form will be used
+    created_date = models.DateField(null=True)
+    updated_date = models.DateField(null=True)
     user = models.ForeignKey(User,        
                             models.SET_NULL,
                             blank=True,
@@ -26,3 +28,15 @@ class Project_Form_Meta(models.Model):
     def save(self, *args, **kwargs):
         #self.form_url = (self.id).replace('-', '')
         super().save(*args, **kwargs)
+
+
+class Project_Form(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    field_name = models.CharField(max_length=80)
+    field_description = models.CharField(max_length=160)
+    field_type = models.CharField(max_length=160)
+    field_size = models.IntegerField(max_length=160)
+    created_date = models.DateField()
+    updated_date = models.DateField()  
+    form_meta = models.ForeignKey(Project_Form_Meta,  models.SET_NULL, blank=True, null=True) 
+    user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True) 
