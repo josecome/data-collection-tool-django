@@ -35,8 +35,17 @@ class Project_Form(models.Model):
     field_name = models.CharField(max_length=80)
     field_description = models.CharField(max_length=160)
     field_type = models.CharField(max_length=160)
-    field_size = models.IntegerField(max_length=160)
+    field_size = models.IntegerField()
     created_date = models.DateField()
     updated_date = models.DateField()  
     form_meta = models.ForeignKey(Project_Form_Meta,  models.SET_NULL, blank=True, null=True) 
-    user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True) 
+    user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True)
+
+
+class Form_Sql_Query_Db(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sql_query = models.TextField()
+    created_date = models.DateField()
+    updated_date = models.DateField()  
+    form_meta = models.ForeignKey(Project_Form,  models.SET_NULL, blank=True, null=True) 
+    user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True)
