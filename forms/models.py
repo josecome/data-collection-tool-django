@@ -47,5 +47,15 @@ class Form_Sql_Query_Db(models.Model):
     sql_query = models.TextField()
     created_date = models.DateField()
     updated_date = models.DateField()  
-    form_meta = models.ForeignKey(Project_Form,  models.SET_NULL, blank=True, null=True) 
+    form_meta = models.ForeignKey(Project_Form_Meta,  models.SET_NULL, blank=True, null=True) 
+    user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True)
+
+
+class FieldwithChoiceOptions(models.Model):
+    id = models.IntegerField(primary_key=True, default=uuid.uuid4, editable=False)
+    option_name = models.CharField(max_length=160)
+    option_label = models.CharField(max_length=160)
+    created_date = models.DateField()
+    updated_date = models.DateField()  
+    project_form = models.ForeignKey(Project_Form,  models.SET_NULL, blank=True, null=True) 
     user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True)

@@ -12,7 +12,7 @@ def landingPage(request):
     context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
     context['form_draft'] = Project_Form_Meta.objects.filter(form_status='deployed')
     context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='deployed')
-    
+
     return render(request, 'landingpage.html', context)
 
 
@@ -27,3 +27,4 @@ def FormPage(request, id):
     context['form'] = field_form
 
     return render(request, 'landingpage.html', context) 
+
