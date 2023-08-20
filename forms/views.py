@@ -64,8 +64,7 @@ def CreateNewForm(request):
 @require_http_methods(["POST"])
 def SubmitNewField(request):
     if request.method == "POST":  
-        form = FieldForm(request.POST)  
-        print('form_url: ' + request.POST.get("form_url"))
+        form = FieldForm(request.POST)
         if form.is_valid():  
             try:  
                 form = form.save(commit=False)
@@ -87,5 +86,49 @@ def SubmitNewField(request):
             render(request, 'landingpage.html')
 
     messages.info(request, _('Something happen 0'))
-    return redirect('/')    
+    return redirect('/')
+
+
+def DeployForm(request):
+    if request.method == "POST":  
+        try:
+            form_url = request.POST.get("form_url_d")
+            form_url = form_url.replace("/formpage/", "")            
+            f = Project_Form_Meta.objects.get(id=form_url)
+            f.form_status = "deployed"
+            f.updated_date = datetime.datetime.now()
+            f.save()
+
+            return redirect('/formpage/' + form_url)  
+        except Exception as e:  
+            return HttpResponse(e)
+            # pass
+    else:    
+        messages.info(request, _('Error Ocurred!'))
+        render(request, 'landingpage.html')
+
+    messages.info(request, _('Error Ocurred!'))
+    return redirect('/')
+
+
+def ArchiveForm(request):
+    if request.method == "POST":  
+        try:
+            form_url = request.POST.get("form_url_a")
+            form_url = form_url.replace("/formpage/", "")        
+            f = Project_Form_Meta.objects.get(id=form_url)
+            f.form_status = "archived"
+            f.updated_date = datetime.datetime.now()
+            f.save()
+
+            return redirect('/formpage/' + form_url)  
+        except Exception as e:  
+            return HttpResponse(e)
+            # pass
+    else:    
+        messages.info(request, _('Error Ocurred!'))
+        render(request, 'landingpage.html')
+
+    messages.info(request, _('Error Ocurred!'))
+    return redirect('/')
 

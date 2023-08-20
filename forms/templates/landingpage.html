@@ -44,22 +44,33 @@
             </div>
             <div style="margin-left: 300px;">
                {% if form_id %} 
-                <h3>{{ form_id.form_name }}
+               <table>
+                <tr>
+                    <td>
+                        <h3>{{ form_id.form_name }}</h3>
+                    </td>
+                    <td>
                     <form action="/deployform/" method="post">
+                        {% csrf_token %}
                         <input type="hidden" name="form_url_d" value="{{ request.path }}"/>   
                         <button type="submit" class="btn btn-primary" style="background-color: #2ECC71;">
                             Deploy
                         </button>
-                    </form>   
+                    </form>  
+                    </td>
+                    <td>
                     <form action="/archiveform/" method="post">
+                        {% csrf_token %}
                         <input type="hidden" name="form_url_a" value="{{ request.path }}"/>   
                         <button type="button" class="btn btn-primary" style="background-color: #E74C3C;">
                             Archive
                         </button>
-                    </form>   
-               </h3>
+                    </form>  
+                    </td>
+                </tr>
+               </table>
                <fieldset style="border: 1px solid white; padding: 20px; background-color: #BFC9CA;">
-                <legend>New Field:</legend>
+               <legend>New Field:</legend>
                <form action="/newfield/submitnewfield/" method="post" style="width: 100%;">
                 {% csrf_token %}
                <table style="width: 100%;">
