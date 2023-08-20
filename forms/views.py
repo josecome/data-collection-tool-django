@@ -134,5 +134,9 @@ def ArchiveForm(request):
 
 
 def DeployedFormOnline(request, id):
-    return redirect('/deployed/' + id)
+    context = {}
+    context['form'] = Project_Form_Meta.objects.get(id=id)
+    context['fields'] = Project_Form.objects.filter(form_meta_id=id)
+
+    return render(request, 'deployedform.html', context)
 
