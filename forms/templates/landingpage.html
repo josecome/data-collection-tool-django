@@ -45,6 +45,8 @@
             <div style="margin-left: 300px;">
                {% if form_id %} 
                <h3>{{ form_id.form_name }}</h3>
+               <fieldset style="border: 1px solid white; padding: 20px; background-color: #BFC9CA;">
+                <legend>New Field:</legend>
                <form action="/newfield/submitnewfield/" method="post" style="width: 100%;">
                 {% csrf_token %}
                <table style="width: 100%;">
@@ -91,10 +93,12 @@
                    </td>
                  </tr>
                  <tr>
-                 <td colspan="6"><hr style="width: 100%;"/></td>
+                 <!--<td colspan="6"><hr style="width: 100%;"/></td>-->
                  </tr>
                </table>
-               </form><br>
+               </form>
+               </fieldset>
+               <br>
                {% for field in fields %}
                <div style="width: 100%; background-color: white; padding-bottom: 10px; margin-bottom: 10px;">
                     Label: {{ field.field_label }} Name: {{ field.field_name }}
