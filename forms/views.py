@@ -33,6 +33,31 @@ def FormPage(request, id):
 
 
 @require_http_methods(["POST"])
+def CreateNewForm(request):
+    if request.method == "POST":  
+        form = MetaForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form = form.save(commit=False)
+                form.user_id = 1 # request.user
+                form.date_created = datetime.datetime.now()
+                form.date_updated = datetime.datetime.now()
+                # return HttpResponse(request.POST.items())
+                form.save()  
+                messages.success(request, _('Successfull logged in'))
+                return redirect('/contents/create_content')  
+            except Exception as e:  
+                return HttpResponse(e)
+                # pass
+        else:    
+            messages.info(request, _('Please, fill all option of new field'))
+            return render(request, '/')  
+
+    messages.info(request, _('Something happen'))
+    return redirect('/')    
+
+
+@require_http_methods(["POST"])
 def SubmitNewField(request):
     if request.method == "POST":  
         form = FieldForm(request.POST)  
