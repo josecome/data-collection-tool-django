@@ -94,7 +94,12 @@
                  <td colspan="6"><hr style="width: 100%;"/></td>
                  </tr>
                </table>
-               </form>
+               </form><br>
+               {% for field in fields %}
+               <div style="width: 100%; background-color: white; padding-bottom: 10px; margin-bottom: 10px;">
+                    Label: {{ field.field_label }} Name: {{ field.field_name }}
+               </div> 
+               {% endfor %}
                {% else %} No Form Selected {% endif %}
             </div>
     </div>

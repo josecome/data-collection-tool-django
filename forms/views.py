@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 import datetime
 from django.utils.translation import gettext_lazy as _
-from .models import Project_Form_Meta
+from .models import Project_Form_Meta, Project_Form
 from .forms import FieldForm, MetaForm
 # Create your views here.
 
@@ -30,6 +30,7 @@ def FormPage(request, id):
     context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='deployed')
     context['form'] = field_form
     context['project_form'] = MetaForm()
+    context['fields'] = Project_Form.objects.filter(form_meta_id=id)
 
     return render(request, 'landingpage.html', context) 
 
