@@ -72,8 +72,8 @@ def SubmitNewField(request):
                 form_url = form_url.replace("/formpage/", "")
                 form.form_meta_id = form_url
                 form.user_id = 1 # request.user
-                form.date_created = datetime.datetime.now()
-                form.date_updated = datetime.datetime.now()
+                form.created_date = datetime.datetime.now()
+                form.updated_date = datetime.datetime.now()
                 # return HttpResponse(request.POST.items())
                 form.save()  
                 messages.success(request, _('Successfull logged in'))
