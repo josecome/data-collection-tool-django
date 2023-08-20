@@ -33,6 +33,7 @@ class Project_Form_Meta(models.Model):
 class Project_Form(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     field_name = models.CharField(max_length=80)
+    field_label = models.CharField(max_length=80)
     field_description = models.CharField(max_length=160)
     field_type = models.CharField(max_length=160)
     field_size = models.IntegerField()
