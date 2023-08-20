@@ -3,6 +3,14 @@
 {% block content %}
     <div style="width: 100%; overflow: hidden;">
             <div style="width: 280px; float: left;">
+                <button type="button" 
+                        class="btn btn-primary" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#formModal"
+                        style="width: 100%;"
+                    >
+                    New Project
+                  </button><br>
                 <div style="color: white; background-color: black; width: 100%;">Deployed</div>
                {% for f in form_deployed %}
                 <div 
@@ -83,5 +91,22 @@
                {% else %} No Form Selected {% endif %}
             </div>
     </div>
-
+  <!-- New Form Modal -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="NewProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="NewProjectModalLabel">New Project</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
