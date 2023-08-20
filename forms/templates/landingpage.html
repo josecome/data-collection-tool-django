@@ -31,7 +31,7 @@
                </form>    
                </div>
                {% endfor %}
-               <div style="color: white; background-color: black; width: 100%;">Arquived</div>
+               <div style="color: white; background-color: black; width: 100%;">Archived</div>
                {% for f in form_arquived %}
                <div 
                class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
@@ -47,6 +47,9 @@
                 <h3>{{ form_id.form_name }}
                     <button type="button" class="btn btn-primary" style="background-color: #2ECC71;">
                         Deploy
+                    </button>
+                    <button type="button" class="btn btn-primary" style="background-color: #E74C3C;">
+                        Archive
                     </button>
                </h3>
                <fieldset style="border: 1px solid white; padding: 20px; background-color: #BFC9CA;">
