@@ -22,5 +22,7 @@ urlpatterns = [
     path('formpage/<str:id>', form_views.FormPage, name='formpage'),
     path('createnewform/', form_views.CreateNewForm, name='createnewform'),
     path('newfield/submitnewfield/', form_views.SubmitNewField, name='submitnewfield'),
+    path('deployform/', form_views.DeployForm, name='deployform'),
+    path('archiveform/', form_views.ArchiveForm, name='deployform'),
     path('admin/', admin.site.urls),
 ]
