@@ -23,7 +23,7 @@ class Project_Form_Meta(models.Model):
         ('draft', 'Draft'),
         ('arquived', 'Arquived'),
     )
-    form_status = models.CharField(max_length=100, choices=F_STATUS)
+    form_status = models.CharField(max_length=100, default='draft', choices=F_STATUS)
 
     def save(self, *args, **kwargs):
         #self.form_url = (self.id).replace('-', '')

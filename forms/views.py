@@ -47,7 +47,8 @@ def CreateNewForm(request):
                 # return HttpResponse(request.POST.items())
                 form.save()  
                 messages.success(request, _('Successfull logged in'))
-                return redirect('/contents/create_content')  
+                print(str(form.id))
+                return redirect('/formpage/' + str(form.id))
             except Exception as e:  
                 return HttpResponse(e)
                 # pass

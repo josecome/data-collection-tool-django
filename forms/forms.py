@@ -11,4 +11,4 @@ class FieldForm(forms.ModelForm):
 class MetaForm(forms.ModelForm):  
     class Meta:  
         model = Project_Form_Meta
-        fields = ["form_name","form_description","form_country","form_field","form_status"]
+        fields = ["form_name","form_description","form_country","form_field"]
