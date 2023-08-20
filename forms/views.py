@@ -64,16 +64,18 @@ def CreateNewForm(request):
 def SubmitNewField(request):
     if request.method == "POST":  
         form = FieldForm(request.POST)  
+        print('form_url: ' + request.POST.get("form_url"))
         if form.is_valid():  
             try:  
                 form = form.save(commit=False)
+                form.form_meta_id = request.POST.get("form_url")
                 form.user_id = 1 # request.user
                 form.date_created = datetime.datetime.now()
                 form.date_updated = datetime.datetime.now()
                 # return HttpResponse(request.POST.items())
                 form.save()  
                 messages.success(request, _('Successfull logged in'))
-                return redirect('/contents/create_content')  
+                return redirect('/formpage/' + str(form.id))  
             except Exception as e:  
                 return HttpResponse(e)
                 # pass

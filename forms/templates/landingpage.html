@@ -45,7 +45,7 @@
             <div style="margin-left: 300px;">
                {% if form_id %} 
                <h3>{{ form_id.form_name }}</h3>
-               <form action="/formpage/submitnewfield" style="width: 100%;">
+               <form action="/newfield/submitnewfield" method="post" style="width: 100%;">
                 {% csrf_token %}
                <table style="width: 100%;">
                  <tr>
@@ -53,13 +53,13 @@
                        Name:
                    </td>
                    <td>
-                       <input type="name" class="form-control" name="field_name" id="name" placeholder="Enter name" style="width: 260px">
+                       <input type="text" class="form-control" name="field_name" id="form_name" placeholder="Enter Field Name" style="width: 260px">
                    </td>
                    <td>
                        Label:
                    </td>
                    <td>
-                       <input type="name" class="form-control" name="field_label" id="name" placeholder="Enter name" style="width: 260px">
+                       <input type="text" class="form-control" name="field_label" id="field_label" placeholder="Enter Lavel" style="width: 260px">
                    </td>
                    <td>
                        Type:
@@ -77,9 +77,10 @@
                        Length:
                    </td>
                    <td>
-                       <input type="name" class="form-control" id="name" placeholder="Enter name" style="width: 260px">
+                       <input type="number" class="form-control" name="field_size" id="field_size" placeholder="Enter Length" style="width: 260px">
                    </td>
-                   <td colspan="2">                       
+                   <td colspan="2">     
+                    <input type="hidden" name="form_url" value="{{ request.path }}"/>                  
                     <button type="submit" class="">Add</button>                       
                    </td>
                  </tr>
