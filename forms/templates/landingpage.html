@@ -44,7 +44,11 @@
             </div>
             <div style="margin-left: 300px;">
                {% if form_id %} 
-               <h3>{{ form_id.form_name }}</h3>
+                <h3>{{ form_id.form_name }}
+                    <button type="button" class="btn btn-primary" style="background-color: #2ECC71;">
+                        Deploy
+                    </button>
+               </h3>
                <fieldset style="border: 1px solid white; padding: 20px; background-color: #BFC9CA;">
                 <legend>New Field:</legend>
                <form action="/newfield/submitnewfield/" method="post" style="width: 100%;">
