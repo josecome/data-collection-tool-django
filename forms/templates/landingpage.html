@@ -45,7 +45,7 @@
             <div style="margin-left: 300px;">
                {% if form_id %} 
                <h3>{{ form_id.form_name }}</h3>
-               <form action="/newfield/submitnewfield" method="post" style="width: 100%;">
+               <form action="/newfield/submitnewfield/" method="post" style="width: 100%;">
                 {% csrf_token %}
                <table style="width: 100%;">
                  <tr>
@@ -78,6 +78,12 @@
                    </td>
                    <td>
                        <input type="number" class="form-control" name="field_size" id="field_size" placeholder="Enter Length" style="width: 260px">
+                   </td>
+                   <td>
+                    Description:
+                   </td>
+                   <td>
+                    <input type="text" class="form-control" name="field_description" id="field_description" placeholder="Enter Description" style="width: 260px">
                    </td>
                    <td colspan="2">     
                     <input type="hidden" name="form_url" value="{{ request.path }}"/>                  
