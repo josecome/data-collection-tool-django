@@ -132,3 +132,7 @@ def ArchiveForm(request):
     messages.info(request, _('Error Ocurred!'))
     return redirect('/')
 
+
+def DeployedFormOnline(request, id):
+    return redirect('/deployed/' + id)
+
