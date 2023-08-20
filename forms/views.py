@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.views.decorators.http import require_http_methods
 from django.contrib import messages
+import datetime
 from django.utils.translation import gettext_lazy as _
 from .models import Project_Form_Meta
 from .forms import FieldForm
@@ -27,4 +30,29 @@ def FormPage(request, id):
     context['form'] = field_form
 
     return render(request, 'landingpage.html', context) 
+
+
+@require_http_methods(["POST"])
+def SubmitNewField(request):
+    if request.method == "POST":  
+        form = FieldForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form = form.save(commit=False)
+                form.user_id = 1 # request.user
+                form.date_created = datetime.datetime.now()
+                form.date_updated = datetime.datetime.now()
+                # return HttpResponse(request.POST.items())
+                form.save()  
+                messages.success(request, _('Successfull logged in'))
+                return redirect('/contents/create_content')  
+            except Exception as e:  
+                return HttpResponse(e)
+                # pass
+        else:    
+            messages.info(request, _('Please, fill all option of new field'))
+            return render(request, '/')  
+
+    messages.info(request, _('Something happen'))
+    return redirect('/')    
 

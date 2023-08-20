@@ -20,5 +20,6 @@ from forms import views as form_views
 urlpatterns = [
     path('', form_views.landingPage, name='landingpage'),
     path('formpage/<str:id>', form_views.FormPage, name='formpage'),
+    path('newfield/submitnewfield', form_views.SubmitNewField, name='submitnewfield'),
     path('admin/', admin.site.urls),
 ]
