@@ -21,7 +21,7 @@ class Project_Form_Meta(models.Model):
     F_STATUS = (
         ('deployed', 'Deployed'),
         ('draft', 'Draft'),
-        ('archived', 'Arquived'),
+        ('archived', 'Archived'),
     )
     form_status = models.CharField(max_length=100, default='draft', choices=F_STATUS)
 

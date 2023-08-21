@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
-    <h1>
+    <h1 style="padding: 10px;">
         {% if form %} 
             {{ form.form_name }}
-        {% endif %}       
+        {% endif %}     
       </h1>
-    <table style="width: 100%; background-color: white; padding-bottom: 10px; margin-bottom: 10px;">
+      <form action="{{ request.path }}" method="post" style="padding: 10px;">
+        {% csrf_token %}
+        <table style="width: 100%; background-color: white; padding-bottom: 10px; margin-bottom: 10px;">
         {% for field in fields %}
         <tr style="width: 100%;">
             <td style="width: 100%;">{{ field.field_label }}</td>
@@ -23,9 +25,10 @@
                 <input type="text" value="" name="{{ field.field_name }}"  style="width: 100%;" />
             </td>
         </tr>
-    {% endfor %}                
-    </table>   
-    <button type="button" class="btn btn-primary">Save</button>
+        {% endfor %}                
+        </table>
+    </form>   
+    <button type="button" class="btn btn-primary" style="margin-left: 10px;">Save</button>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

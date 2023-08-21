@@ -11,36 +11,42 @@
                     >
                     New Project
                   </button><br>
-                <div style="color: white; background-color: black; width: 100%;">Deployed</div>
-               {% for f in form_deployed %}
-                <div 
-                    class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
-                    >
-                    <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px;">
-                        <button type="submit" class="">{{ f.form_name }}</button>
-                    </form>                    
-                </div>
+                <div style="color: white; background-color: black; width: 100%;">Deployed ({{ form_deployed|length }})</div>
+                <table style="width: 100%;">
+                {% for f in form_deployed %}               
+                    <tr>
+                     <td class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}">
+                         <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px; width: 100%;">
+                             <button type="submit" class="btn default">{{ f.form_name }}</button>
+                         </form> 
+                     </td>
+                    </tr>               
+                {% endfor %}
+                </table>
+               <div style="color: white; background-color: black; width: 100%;">Draft ({{ form_draft|length }})</div>
+               <table style="width: 100%;">
+               {% for f in form_draft %}               
+                   <tr>
+                    <td class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}">
+                        <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px; width: 100%;">
+                            <button type="submit" class="btn default">{{ f.form_name }}</button>
+                        </form> 
+                    </td>
+                   </tr>               
                {% endfor %}
-               <div style="color: white; background-color: black; width: 100%;">Draft</div>
-               {% for f in form_draft %}
-               <div 
-               class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
-               >
-               <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px;">
-                   <button type="submit" class="">{{ f.form_name }}</button>
-               </form>    
-               </div>
-               {% endfor %}
-               <div style="color: white; background-color: black; width: 100%;">Archived</div>
-               {% for f in form_arquived %}
-               <div 
-               class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}"
-               >
-               <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px;">
-                   <button type="submit" class="">{{ f.form_name }}</button>
-               </form>    
-               </div>
-               {% endfor %}
+               </table>
+               <div style="color: white; background-color: black; width: 100%;">Archived ({{ form_arquived|length }})</div>
+               <table style="width: 100%;">
+                {% for f in form_arquived %}               
+                    <tr>
+                     <td class="projects_name{% if forloop.counter0|divisibleby:2 %} projects_name_y{% else %} projects_name_n{% endif %}">
+                         <form action="/formpage/{{ f.pk }}" style="float: left; padding-right: 4px; width: 100%;">
+                             <button type="submit" class="btn default">{{ f.form_name }}</button>
+                         </form> 
+                     </td>
+                    </tr>               
+                {% endfor %}
+                </table>
             </div>
             <div style="margin-left: 300px;">
                {% if form_id %} 
@@ -80,7 +86,9 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <a href="/deployed/{{ form_id.id }}" style="font-size: 12px; text-decoration: none;">Link form online access</a>
+                        {% if form_id.form_status|lower == "deployed" %}
+                            <a href="/deployed/{{ form_id.id }}" style="font-size: 12px; text-decoration: none;">Link form online access</a>
+                        {% endif %}
                     </td>
                 </tr>
                </table>
@@ -155,9 +163,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="/createnewform/" method="post">
+            <form action="/createnewform/" method="post" class="new_project_form">
                 {% csrf_token %}
-                {{ project_form }}
+                {{ project_form.as_p }}
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>

@@ -6,6 +6,7 @@ import datetime
 from django.utils.translation import gettext_lazy as _
 from .models import Project_Form_Meta, Project_Form
 from .forms import FieldForm, MetaForm
+from django.db import connections
 # Create your views here.
 
 
@@ -13,8 +14,8 @@ def landingPage(request):
     messages.success(request, _('You are in Home Page, Welcome!'))
     context = {}
     context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
-    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='deployed')
-    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='deployed')
+    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='draft')
+    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='archived')
     context['project_form'] = MetaForm()
 
     return render(request, 'landingpage.html', context)
@@ -24,13 +25,14 @@ def FormPage(request, id):
     messages.success(request, _('You are in Home Page, Welcome!'))
     field_form = FieldForm()
     context = {}
-    context['form_id'] = Project_Form_Meta.objects.get(pk=id.replace('-', ''))
+    context['form_id'] = Project_Form_Meta.objects.get(id=id.replace('-', ''))
+    print('PP: ' + str(Project_Form_Meta.objects.get(id=id.replace('-', ''))))
     context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
-    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='deployed')
-    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='deployed')
+    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='draft')
+    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='archived')
     context['form'] = field_form
     context['project_form'] = MetaForm()
-    context['fields'] = Project_Form.objects.filter(form_meta_id=id)
+    context['fields'] = Project_Form.objects.filter(form_meta_id=id.replace('-', ''))
 
     return render(request, 'landingpage.html', context) 
 
@@ -134,6 +136,19 @@ def ArchiveForm(request):
 
 
 def DeployedFormOnline(request, id):
+    if request.method == "POST":  # Insert Data In Form
+        try:
+            clns = ""
+            vls = ""
+            #request.POST['contact']
+            cursor = connections['default'].cursor()
+            cursor.execute("insert into clients (" + clns + ") VALUES ( " + vls + " )")
+            messages.info(request, _('Form Saved Successfully!'))
+        except Exception as e: 
+            messages.info(request, _('Error Ocurred!'))
+    else:   
+        pass
+    # Get Parameters and render the Form
     context = {}
     context['form'] = Project_Form_Meta.objects.get(id=id)
     context['fields'] = Project_Form.objects.filter(form_meta_id=id)
