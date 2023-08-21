@@ -15,7 +15,7 @@ After add columns you can preview the form
 
 If everything is ok, you can deploy project by click on button 'Deploy'. Click the link provided above to find link to share for filling form.
 <img src="forms/static/get_link.jpg">
-The link provide will display the form
+The link provided will display the form
 <img src="forms/static/deployed_form.jpg">
 
 ## To run the project
