@@ -7,9 +7,14 @@ Home page has list of all projects created: Deployed, Draft or Archived. Also ha
 To create new project, click button 'New Project' and fill the form
 <img src="forms/static/create_project.jpg">
 
-After form is created, you can add columns
+After form is created, you can add columns to the project (form)
 <img src="forms/static/display_project.jpg">
 
+After add columns you can preview the form
+<img src="forms/static/preview_form.jpg">
+
+If everything is ok, you can deploy project by click on button 'Deploy'. Click the link provided above to find link to share for filling form.
+<img src="forms/static/deployed_form.jpg">
 
 ## To run the project
 
