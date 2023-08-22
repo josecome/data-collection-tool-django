@@ -95,11 +95,25 @@ def DeployForm(request):
     if request.method == "POST":  
         try:
             form_url = request.POST.get("form_url_d")
-            form_url = form_url.replace("/formpage/", "")            
+            form_url = form_url.replace("/formpage/", "")   
             f = Project_Form_Meta.objects.get(id=form_url)
             f.form_status = "deployed"
             f.updated_date = datetime.datetime.now()
             f.save()
+            clns = get_columns_of_form_and_attr(form_url)
+            print(clns)
+            qry = "CREATE TABLE " + form_url.replace(' ', '') + " ("
+            for c in clns:
+                t = tuple(c)
+                cln = str(t[0]) + " " + str(t[1]) + "(" + str(t[2]) + "), "                
+                qry += cln
+
+            qry += ")" 
+            qry = qry.replace(", )", ")")   
+            print(qry)
+
+            cursor = connections['default'].cursor()
+            cursor.execute(qry)
 
             return redirect('/formpage/' + form_url)  
         except Exception as e:  
@@ -117,7 +131,7 @@ def ArchiveForm(request):
     if request.method == "POST":  
         try:
             form_url = request.POST.get("form_url_a")
-            form_url = form_url.replace("/formpage/", "")        
+            form_url = form_url.replace("/formpage/", "")
             f = Project_Form_Meta.objects.get(id=form_url)
             f.form_status = "archived"
             f.updated_date = datetime.datetime.now()
@@ -138,11 +152,22 @@ def ArchiveForm(request):
 def DeployedFormOnline(request, id):
     if request.method == "POST":  # Insert Data In Form
         try:
+            clns = get_columns_of_form(id)
+            print(clns)
+            qry = "INSERT INTO " + id.replace(' ', '') + " ("
             clns = ""
             vls = ""
-            #request.POST['contact']
+            for c in clns:
+                clns += c + ","
+                vls = "'" + request.POST[c] + "',"
+
+            qry += clns + ") VALUES (" + vls + ")"
+            qry = qry.replace(",)", ")")
+            print(qry)
+
             cursor = connections['default'].cursor()
-            cursor.execute("insert into clients (" + clns + ") VALUES ( " + vls + " )")
+            cursor.execute(qry)
+
             messages.info(request, _('Form Saved Successfully!'))
         except Exception as e: 
             messages.info(request, _('Error Ocurred!'))
@@ -154,4 +179,19 @@ def DeployedFormOnline(request, id):
     context['fields'] = Project_Form.objects.filter(form_meta_id=id)
 
     return render(request, 'deployedform.html', context)
+
+
+def get_columns_of_form(id):
+    clns = []
+    # cs = Project_Form.objects.filter(form_meta_id=id).values('field_name')  [{'field_name': 'first_name'}, {'field_name': 'age'}]
+    cs = Project_Form.objects.values_list('field_name', flat=True).filter(form_meta_id=id) # ['first_name', 'age', 'place_of_birth', 'last_name']
+    for c in cs:
+        clns.append(c)
+
+    return clns
+
+
+def get_columns_of_form_and_attr(id):
+    cs = Project_Form.objects.values_list('field_name', 'field_type', 'field_size').filter(form_meta_id=id)
+    return cs
 
