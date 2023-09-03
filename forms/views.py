@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 import datetime
@@ -194,4 +195,48 @@ def get_columns_of_form(id):
 def get_columns_of_form_and_attr(id):
     cs = Project_Form.objects.values_list('field_name', 'field_type', 'field_size').filter(form_meta_id=id)
     return cs
+
+
+def loginPage(request):
+    if request.user.is_authenticated:
+        messages.success(request, _('AAAA'))
+        return redirect('/')
+    else:    
+        if request.method == 'POST':
+            username = request.POST["username"]
+            password = request.POST["password"]
+            # admin, password
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                # Redirect to a success page.
+                messages.success(request, _('Successfull logged in'))
+                return redirect('/')           
+            else:
+                # Return an 'invalid login' error message.
+                messages.info(request, _('Please, Invalid Username and Password!'))
+            
+    return render(request, 'login.html')
+
+
+def registrationPage(request):
+    form = CreateUserForm()
+        
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.sucess(request, 'Account was sucessfully created for ' + user)
+            
+            return redirect('login.html')
+                                
+    context = {'form': form}
+    return render(request, 'register.html', context)
+   
+   
+def logout_view(request):
+    logout(request)
+        
+    return render(request,'logout.html')    
 

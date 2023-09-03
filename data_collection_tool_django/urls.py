@@ -26,4 +26,7 @@ urlpatterns = [
     path('deployform/', form_views.DeployForm, name='deployform'),
     path('archiveform/', form_views.ArchiveForm, name='deployform'),
     path('admin/', admin.site.urls),
+    path('login/', form_views.loginPage, name='login'),
+    path('logout/', form_views.logout_view, name='logout'),
+    path('register/', form_views.registrationPage, name='register'),
 ]
