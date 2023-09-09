@@ -1,38 +1,45 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<style>
-    #login_div{
-        width: 400px;
-    }
-</style>
-<div style="float: top; width: 100%;">
-  {% if messages %}
-      {% for message in messages %}
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>                  
-      {% endfor %}
-  {% endif %}
-</div>
-<div id="login_div" class="container d-flex align-items-center justify-content-center">
-    <form action="/login/" method="POST">
-        {% csrf_token %}
-        <div class="mb-3">
-          <label for="InputEmail1" class="form-label">Email address</label>
-          <input type="text" class="form-control" name="username" id="InputEmail1">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="InputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" name="password" id="InputPassword1">
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="Check1">
-          <label class="form-check-label" for="Check1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-</div>
+    <style>
+        #login_div {
+            width: 400px;
+        }
+    </style>
+    <div style="float: top; width: 100%;">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div id="login_div"
+         class="container d-flex align-items-center justify-content-center">
+        <form action="/login/" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="InputEmail1" class="form-label">Email address</label>
+                <input type="text" class="form-control" name="username" id="InputEmail1">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="InputPassword1" class="form-label">Password</label>
+                <input type="password"
+                       class="form-control"
+                       name="password"
+                       id="InputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="Check1">
+                <label class="form-check-label" for="Check1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 {% endblock content %}
