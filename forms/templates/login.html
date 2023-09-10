@@ -5,8 +5,12 @@
         #login_div {
             width: 400px;
         }
+        #main_div {
+            float: top; 
+            width: 100%;        
+        }
     </style>
-    <div style="float: top; width: 100%;">
+    <div id="main_div">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -21,7 +25,7 @@
     </div>
     <div id="login_div"
          class="container d-flex align-items-center justify-content-center">
-        <form action="/login/" method="POST">
+        <form action="/login/" method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="InputEmail1" class="form-label">Email address</label>
