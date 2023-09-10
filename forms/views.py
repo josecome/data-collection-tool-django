@@ -16,7 +16,7 @@ from .utils import (
     send_forgotten_username_email, 
     send_activation_change_email,
 )
-from .decorators import is_admin, user_is_project_author
+from .decorators import admin_required, user_is_project_author
 # Create your views here.
 
 
@@ -248,6 +248,7 @@ def registrationPage(request):
 def disable_project_by_admin():
     # Require admin
     pass
+
 
 @user_is_project_author
 def edit_project(request, user_id):
