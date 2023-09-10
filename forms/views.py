@@ -9,8 +9,14 @@ from .models import Project_Form_Meta, Project_Form
 from .forms import FieldForm, MetaForm
 from .forms import CreateUserForm
 from django import forms
-
 from django.db import connections
+from .utils import (
+    send_activation_email, 
+    send_reset_password_email, 
+    send_forgotten_username_email, 
+    send_activation_change_email,
+)
+
 # Create your views here.
 
 
