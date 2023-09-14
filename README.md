@@ -20,7 +20,13 @@ The link provided will display the form
 
 ## To run the project
 
-Type in commandline
+Type and run in commandline the follow command to install required packages
+
+### `pip install -r requirements.txt`
+
+Type and in commandline
+
+### `py manage.py migrate`
 
 ### `py manage.py runserver`
 
