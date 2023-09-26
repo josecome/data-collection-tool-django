@@ -22,10 +22,11 @@ from .decorators import admin_required, user_is_project_author
 
 def landingPage(request):
     messages.success(request, _('You are in Home Page, Welcome!'))
+    forms = Project_Form_Meta.objects.all()
     context = {}
-    context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
-    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='draft')
-    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='archived')
+    context['form_deployed'] = forms.filter(form_status='deployed')
+    context['form_draft'] = forms.filter(form_status='draft')
+    context['form_arquived'] = forms.filter(form_status='archived')
     context['project_form'] = MetaForm()
 
     return render(request, 'landingpage.html', context)
@@ -35,11 +36,13 @@ def FormPage(request, id):
     messages.success(request, _('You are in Home Page, Welcome!'))
     field_form = FieldForm()
     context = {}
-    context['form_id'] = Project_Form_Meta.objects.get(id=id.replace('-', ''))
-    print('PP: ' + str(Project_Form_Meta.objects.get(id=id.replace('-', ''))))
-    context['form_deployed'] = Project_Form_Meta.objects.filter(form_status='deployed')
-    context['form_draft'] = Project_Form_Meta.objects.filter(form_status='draft')
-    context['form_arquived'] = Project_Form_Meta.objects.filter(form_status='archived')
+    forms = Project_Form_Meta.objects.all()
+
+    context['form_id'] = forms.get(id=id.replace('-', ''))
+    # print('PP: ' + str(Project_Form_Meta.objects.get(id=id.replace('-', ''))))
+    context['form_deployed'] = forms.filter(form_status='deployed')
+    context['form_draft'] = forms.filter(form_status='draft')
+    context['form_arquived'] = forms.filter(form_status='archived')
     context['form'] = field_form
     context['project_form'] = MetaForm()
     context['fields'] = Project_Form.objects.filter(form_meta_id=id.replace('-', ''))
