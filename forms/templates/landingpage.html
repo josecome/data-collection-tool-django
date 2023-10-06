@@ -156,7 +156,11 @@
                <br>
                {% for field in fields %}
                <div style="width: 100%; background-color: white; padding-bottom: 10px; margin-bottom: 10px;">
-                    Label: {{ field.field_label }} Name: {{ field.field_name }}
+                <span class="btn btn-info fieldname">{{ field.field_label }}</span><br />
+                <span class="btn btn-primary">Label</span> <span class="btn btn-secondary">{{ field.field_label }}</span>
+                <span class="btn btn-primary">Name</span> <span class="btn btn-secondary">{{ field.field_name }}</span>
+                <span class="btn btn-primary">Type</span> <span class="btn btn-secondary">{{ field.field_type }}</span>
+                <span class="btn btn-primary">Size</span> <span class="btn btn-secondary">{{ field.field_size }}</span>
                </div> 
                {% endfor %}
                {% else %} No Form Selected {% endif %}
@@ -210,7 +214,7 @@
                     </td>
                 </tr>
             {% endfor %}                
-            </table>
+            </table> 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
