@@ -61,3 +61,10 @@ class FieldwithChoiceOptions(SharedFields):
     option_label = models.CharField(max_length=160)
     project_form = models.ForeignKey(Project_Form,  models.SET_NULL, blank=True, null=True) 
     user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True)
+
+class Project_Form_Shared(SharedFields):
+    id = models.IntegerField(primary_key=True, default=uuid.uuid4, editable=False)
+    form_id = models.ForeignKey(Project_Form_Meta,  models.SET_NULL, blank=True, null=True)
+    shared_with_user = models.ForeignKey(User,  models.SET_NULL, blank=True, null=True) 
+    view_form = models.BooleanField(default=False)
+    edit_form = models.BooleanField(default=False)
